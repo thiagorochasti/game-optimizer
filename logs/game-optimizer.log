@@ -1,0 +1,66 @@
+[2026-02-03 22:37:34] [SUCCESS] Configuration loaded successfully
+[2026-02-03 22:37:34] [INFO] === Game Optimizer Started ===
+[2026-02-03 22:37:34] [INFO] Monitoring Triggers: steam
+[2026-02-03 22:37:34] [INFO] Trigger App already running on startup
+[2026-02-03 22:37:49] [INFO] All Trigger Apps closed.
+[2026-02-03 22:37:49] [INFO] Trigger App stopped - reopening managed processes...
+[2026-02-03 22:37:52] [INFO] Restarting Windows services...
+[2026-02-03 22:37:54] [INFO] Trigger confirmed running. Optimizing...
+[2026-02-03 22:37:54] [INFO] Trigger App started - closing managed processes...
+[2026-02-03 22:37:54] [INFO] Closing: FortiTray (Path: C:\Program Files\Fortinet\FortiClient\FortiTray.exe)
+[2026-02-03 22:37:55] [INFO] Saved for reopening: FortiTray (Args: '')
+[2026-02-03 22:37:55] [SUCCESS] Successfully closed: FortiTray (ID: 52580)
+[2026-02-03 22:37:55] [INFO] Closing: espansod (Path: C:\Users\thiag\AppData\Local\Programs\Espanso\espansod.exe)
+[2026-02-03 22:37:55] [INFO] Saved for reopening: espansod (Args: 'launcher')
+[2026-02-03 22:37:55] [SUCCESS] Successfully closed: espansod (ID: 34712)
+[2026-02-03 22:37:55] [INFO] Closing: espansod (Path: C:\Users\thiag\AppData\Local\Programs\Espanso\espansod.exe)
+[2026-02-03 22:37:55] [SUCCESS] Successfully closed: espansod (ID: 46852)
+[2026-02-03 22:37:55] [INFO] Closing: espansod (Path: C:\Users\thiag\AppData\Local\Programs\Espanso\espansod.exe)
+[2026-02-03 22:37:55] [SUCCESS] Successfully closed: espansod (ID: 50524)
+[2026-02-03 22:37:55] [INFO] Closing: Lightshot (Path: C:\Program Files (x86)\Skillbrains\lightshot\5.5.0.7\Lightshot.exe)
+[2026-02-03 22:37:55] [INFO] Saved for reopening: Lightshot (Args: '')
+[2026-02-03 22:37:55] [SUCCESS] Successfully closed: Lightshot (ID: 48844)
+[2026-02-03 22:37:55] [INFO] Closing: FortiVPN (Path: C:\Program Files\Fortinet\FortiClient\FortiVPN.exe)
+[2026-02-03 22:37:55] [INFO] Saved for reopening: FortiVPN (Args: '')
+[2026-02-03 22:37:55] [SUCCESS] Successfully closed: FortiVPN (ID: 41400)
+[2026-02-03 22:37:55] [INFO] Closing: PowerToys (Path: C:\Users\thiag\AppData\Local\PowerToys\PowerToys.exe)
+[2026-02-03 22:37:55] [INFO] Saved for reopening: PowerToys (Args: '')
+[2026-02-03 22:37:55] [SUCCESS] Successfully closed: PowerToys (ID: 52720)
+[2026-02-03 22:37:55] [INFO] Closing: TogglTrack (Path: C:\Users\thiag\AppData\Local\TogglTrack\app-10.17.0\TogglTrack.exe)
+[2026-02-03 22:37:55] [INFO] Saved for reopening: TogglTrack (Args: '')
+[2026-02-03 22:37:55] [SUCCESS] Successfully closed: TogglTrack (ID: 8484)
+[2026-02-03 22:37:55] [INFO] Closing: AnyDesk (Path: C:\Program Files (x86)\AnyDesk\AnyDesk.exe)
+[2026-02-03 22:37:55] [INFO] Saved for reopening: AnyDesk (Args: '--service')
+[2026-02-03 22:37:55] [SUCCESS] Successfully closed: AnyDesk (ID: 21168)
+[2026-02-03 22:37:55] [INFO] Closing: AnyDesk (Path: C:\Program Files (x86)\AnyDesk\AnyDesk.exe)
+[2026-02-03 22:37:55] [SUCCESS] Successfully closed: AnyDesk (ID: 47160)
+[2026-02-03 22:37:55] [INFO] Stopping Windows services for gaming optimization...
+[2026-02-03 22:37:55] [INFO] Stopping service: FA_Scheduler (FortiClient VPN Service Scheduler)
+[2026-02-03 22:37:56] [ERROR] Error stopping service FA_Scheduler : O serviço 'FortiClient VPN Service Scheduler (FA_Scheduler)' não pode ser interrompido devido ao seguinte erro: Não é possível parar o serviço FA_Scheduler no computador '.'.
+[2026-02-03 22:37:56] [INFO] Service already stopped: DiagTrack
+[2026-02-03 22:37:56] [INFO] Service already stopped: SysMain
+[2026-02-03 22:37:56] [INFO] Service already stopped: BITS
+[2026-02-03 22:37:56] [INFO] Service already stopped: DoSvc
+[2026-02-03 22:37:56] [INFO] Service already stopped: WerSvc
+[2026-02-03 22:37:56] [INFO] Service already stopped: MapsBroker
+[2026-02-03 22:37:56] [INFO] Service already stopped: RemoteRegistry
+[2026-02-03 22:38:11] [INFO] All Trigger Apps closed.
+[2026-02-03 22:38:11] [INFO] Trigger App stopped - reopening managed processes...
+[2026-02-03 22:38:14] [INFO] Reopening: AnyDesk
+[2026-02-03 22:38:14] [SUCCESS] Successfully reopened: AnyDesk (Args: --service)
+[2026-02-03 22:38:14] [INFO] Reopening: FortiTray
+[2026-02-03 22:38:14] [SUCCESS] Successfully reopened: FortiTray
+[2026-02-03 22:38:14] [INFO] Reopening: TogglTrack
+[2026-02-03 22:38:14] [SUCCESS] Successfully reopened: TogglTrack
+[2026-02-03 22:38:14] [INFO] Reopening: Lightshot
+[2026-02-03 22:38:14] [SUCCESS] Successfully reopened: Lightshot
+[2026-02-03 22:38:14] [INFO] Reopening: FortiVPN
+[2026-02-03 22:38:14] [SUCCESS] Successfully reopened: FortiVPN
+[2026-02-03 22:38:14] [INFO] Reopening: PowerToys
+[2026-02-03 22:38:14] [SUCCESS] Successfully reopened: PowerToys
+[2026-02-03 22:38:14] [INFO] Reopening: espansod
+[2026-02-03 22:38:14] [SUCCESS] Successfully reopened: espansod (Args: launcher)
+[2026-02-03 22:38:14] [INFO] Restarting Windows services...
+[2026-02-03 22:38:14] [INFO] Restarting service: FA_Scheduler
+[2026-02-03 22:38:14] [SUCCESS] Successfully restarted service: FA_Scheduler
+[2026-02-03 22:38:14] [INFO] Monitoring for triggers: [steam]

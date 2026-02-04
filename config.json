@@ -1,0 +1,40 @@
+﻿{
+    "triggerProcess":  [
+                           "steam"
+                       ],
+    "servicesToManage":  [
+                             "FA_Scheduler",
+                             "DiagTrack",
+                             "SysMain",
+                             "BITS",
+                             "DoSvc",
+                             "WerSvc",
+                             "MapsBroker",
+                             "RemoteRegistry"
+                         ],
+    "processesToManage":  [
+                              "FortiTray",
+                              "espansod",
+                              "Lightshot",
+                              "FortiVPN",
+                              "PowerToys",
+                              "TogglTrack",
+                              "AnyDesk"
+                          ],
+    "settings":  {
+                     "steamCheckInterval":  5,
+                     "enableLogging":  true,
+                     "logPath":  "logs\\game-optimizer.log",
+                     "reopenDelay":  3,
+                     "enableServiceManagement":  true
+                 },
+    "processesToReopenOnly":  [
+                                  "FortiTray",
+                                  "espansod",
+                                  "Lightshot",
+                                  "FortiVPN",
+                                  "PowerToys",
+                                  "TogglTrack",
+                                  "AnyDesk"
+                              ]
+}
