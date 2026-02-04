@@ -177,6 +177,13 @@ $serviceCheckbox.Text = "Otimizar Serviços do Windows (Recomendado)"
 $serviceCheckbox.Checked = $global:WizardState.EnableServices
 $panelStep2.Controls.Add($serviceCheckbox)
 
+$focusAssistCheckbox = New-Object System.Windows.Forms.CheckBox
+$focusAssistCheckbox.Location = New-Object System.Drawing.Point(20, 475)
+$focusAssistCheckbox.Size = New-Object System.Drawing.Size(600, 25)
+$focusAssistCheckbox.Text = "Desativar Notificacoes durante jogos (Focus Assist)"
+$focusAssistCheckbox.Checked = $false
+$panelStep2.Controls.Add($focusAssistCheckbox)
+
 # --- Logic ---
 $script:currentStep = 1
 
@@ -222,6 +229,7 @@ $btnNext.Add_Click({
             }
         
             $global:WizardState.EnableServices = $serviceCheckbox.Checked
+            $global:WizardState.EnableFocusAssist = $focusAssistCheckbox.Checked
             $form.DialogResult = [System.Windows.Forms.DialogResult]::OK
             $form.Close()
         }
@@ -255,6 +263,7 @@ if ($result -eq [System.Windows.Forms.DialogResult]::OK) {
             reopenDelay             = 3
             steamCheckInterval      = 5
             enableServiceManagement = $global:WizardState.EnableServices
+            enableFocusAssist       = $global:WizardState.EnableFocusAssist
         }
     }
     

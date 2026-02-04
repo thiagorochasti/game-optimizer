@@ -1,0 +1,30 @@
+{
+    "triggerProcess": [
+        "steam"
+    ],
+    "processesToManage": [
+        "chrome",
+        "msedge",
+        "discord",
+        "spotify"
+    ],
+    "processesToReopenOnly": [
+        "chrome",
+        "discord",
+        "spotify"
+    ],
+    "servicesToManage": [
+        "DiagTrack",
+        "SysMain",
+        "BITS",
+        "DoSvc"
+    ],
+    "settings": {
+        "enableLogging": true,
+        "logPath": "logs\\game-optimizer.log",
+        "reopenDelay": 3,
+        "steamCheckInterval": 5,
+        "enableServiceManagement": true,
+        "enableFocusAssist": false
+    }
+}

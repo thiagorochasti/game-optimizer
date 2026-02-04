@@ -145,6 +145,66 @@ function Restart-ManagedServices {
     $script:StoppedServices = @()
 }
 
+# Get current Focus Assist state
+function Get-FocusAssistState {
+    <#
+    .SYNOPSIS
+        Retrieves the current Focus Assist state from Windows registry
+    .RETURNS
+        0 = Focus Assist enabled (notifications blocked)
+        1 = Focus Assist disabled (notifications normal)
+        $null = Error reading state
+    #>
+    try {
+        $regPath = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings"
+        
+        if (Test-Path $regPath) {
+            $value = Get-ItemProperty -Path $regPath -Name "NOC_GLOBAL_SETTING_TOASTS_ENABLED" -ErrorAction SilentlyContinue
+            if ($null -ne $value) {
+                return $value.NOC_GLOBAL_SETTING_TOASTS_ENABLED
+            }
+        }
+        
+        # Default: notifications enabled
+        return 1
+    }
+    catch {
+        Write-Log "Error getting Focus Assist state: $_" -Level WARNING
+        return $null
+    }
+}
+
+# Set Focus Assist state
+function Set-FocusAssistState {
+    <#
+    .SYNOPSIS
+        Sets the Focus Assist state in Windows registry
+    .PARAMETER Mode
+        0 = Enable Focus Assist (block notifications)
+        1 = Disable Focus Assist (allow notifications)
+    #>
+    param([int]$Mode)
+    
+    try {
+        $regPath = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings"
+        
+        # Create key if it doesn't exist
+        if (-not (Test-Path $regPath)) {
+            New-Item -Path $regPath -Force | Out-Null
+        }
+        
+        Set-ItemProperty -Path $regPath -Name "NOC_GLOBAL_SETTING_TOASTS_ENABLED" -Value $Mode -Type DWord
+        $modeText = if ($Mode -eq 0) { "ENABLED (blocked)" } else { "DISABLED (normal)" }
+        Write-Log "Focus Assist set to: $modeText" -Level INFO
+        return $true
+    }
+    catch {
+        Write-Log "Error setting Focus Assist: $_" -Level ERROR
+        return $false
+    }
+}
+
+
 # Get full path of a running process
 
 # Close managed processes
@@ -265,6 +325,16 @@ function Close-ManagedProcesses {
     # Stop Windows services
     Stop-ManagedServices
     
+    # Save and enable Focus Assist (block notifications during gaming)
+    if ($script:Config.settings.enableFocusAssist) {
+        $script:OriginalFocusAssist = Get-FocusAssistState
+        if ($null -ne $script:OriginalFocusAssist) {
+            Set-FocusAssistState -Mode 0  # 0 = Block notifications
+            $originalState = if ($script:OriginalFocusAssist -eq 0) { "Enabled" } else { "Disabled" }
+            Write-Log "Focus Assist - Original state: $originalState, Now: Enabled" -Level INFO
+        }
+    }
+    
     # Save state
     Save-State
 }
@@ -320,6 +390,14 @@ function Reopen-ManagedProcesses {
         catch {
             Write-Log "Error reopening $processName : $_" -Level ERROR
         }
+    }
+    
+    # Restore Focus Assist to original state
+    if ($script:Config.settings.enableFocusAssist -and $null -ne $script:OriginalFocusAssist) {
+        Set-FocusAssistState -Mode $script:OriginalFocusAssist
+        $restoredState = if ($script:OriginalFocusAssist -eq 0) { "Enabled" } else { "Disabled" }
+        Write-Log "Focus Assist restored to: $restoredState" -Level INFO
+        $script:OriginalFocusAssist = $null
     }
     
     # Restart Windows services
