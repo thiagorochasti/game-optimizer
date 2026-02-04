@@ -17,13 +17,21 @@ Otimize o desempenho fechando aplicativos pesados automaticamente quando você a
 3. **Libera Recursos:** Fecha navegadores, Discord, Spotify e outros devoradores de RAM.
 4. **Restaura Tudo:** Quando você fecha o jogo, ele reabre todos os seus apps e os deixa exatamente como estavam.
 
-## 📥 Como Instalar
+## 📦 Instalação
 
-1. Vá na aba **[Releases](../../releases)** aqui do GitHub.
-2. Baixe o arquivo `GamePerformanceOptimizer-v3.5.zip`.
-3. Extraia a pasta.
-4. Clique duas vezes em `Install-GameOptimizer.bat`.
-   - *Vai pedir permissão de administrador para criar a tarefa agendada.*
+### Opção 1: Usando o Gerenciador (Recomendado)
+
+1. Baixe a versão mais recente: **[GamePerformanceOptimizer-v1.0.zip](../../releases/latest)**
+2. Extraia o arquivo ZIP
+3. Execute **`GameOptimizer-Manager.bat`**
+4. Selecione a opção **[1] Instalar Game Optimizer**
+5. Siga o assistente interativo para selecionar quais aplicativos gerenciar
+
+### Opção 2: Instalação Direta
+
+1. Baixe e extraia o ZIP
+2. Execute **`Setup.ps1`** (clique com botão direito → Executar com PowerShell)
+3. Siga o assistente de configuração
 
 ## ⚙️ Como Configurar (Passo a Passo)
 
