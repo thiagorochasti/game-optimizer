@@ -1,237 +1,70 @@
-# 🎮 Game Performance Optimizer
+# 🚀 Game Performance Optimizer (Universal)
 
-Fecha automaticamente aplicativos configurados quando você inicia um jogo (ex: Steam) e os reabre quando você termina. Projetado para melhorar o desempenho dos jogos liberando recursos do sistema.
+**Transforme seu PC em uma máquina de foco.** 
+Otimize o desempenho fechando aplicativos pesados automaticamente quando você abre seus jogos ou programas de trabalho.
 
-![Platform](https://img.shields.io/badge/plataforma-Windows%2010%2F11-blue.svg)
-![PowerShell](https://img.shields.io/badge/powershell-5.1%2B-blue.svg)
-![License](https://img.shields.io/badge/licença-MIT-green.svg)
+> **Versão 3.5 [Universal]:** Agora funciona com QUALQUER aplicativo (Steam, Photoshop, VS Code, etc) e suporta múltiplos gatilhos!
 
----
-
-## 📖 O que é?
-
-O Game Performance Optimizer é uma ferramenta leve baseada em PowerShell que roda silenciosamente em segundo plano e automaticamente:
-
-1. **Detecta** quando você inicia um aplicativo de jogo (Steam, Epic Games, etc.)
-2. **Fecha** aplicativos que consomem muitos recursos (navegadores, Discord, Spotify, etc.)
-3. **Para** serviços desnecessários do Windows (opcional)
-4. **Reabre** tudo automaticamente quando você fecha o jogo
-
-Nenhuma intervenção manual necessária - simplesmente funciona! 🚀
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+![Platform](https://img.shields.io/badge/platform-Windows%2010%2F11-blue.svg)
 
 ---
 
-## ✨ Principais Funcionalidades
+## ✨ O que ele faz?
 
-- **🔍 Detecção Inteligente de Processos** - Extrai automaticamente informações de inicialização dos atalhos da pasta Inicializar
-- **🎯 Suporte a Múltiplos Gatilhos** - Monitora vários aplicativos (Steam, Epic Games, Photoshop, etc.)
-- **⚙️ Gerenciamento de Serviços** - Opcionalmente para serviços do Windows durante jogos (DiagTrack, SysMain, BITS, etc.)
-- **🔄 Reinicialização Automática** - Reabre aplicativos fechados com os argumentos corretos ao sair
-- **📊 Logs Robustos** - Logs detalhados para solução de problemas
-- **🖥️ Gerenciamento Fácil** - Interface interativa baseada em menu para instalação, atualizações e configuração
-- **🛡️ Detecção Genérica de Atalhos** - Funciona com QUALQUER aplicativo que tenha atalho na pasta Inicializar
+1. **Monitora em Silêncio:** Fica rodando em segundo plano (consumindo quase 0 memória).
+2. **Ativa Automaticamente:** Assim que você abre um "App Gatilho" (ex: abrir o jogo *Cyberpunk* ou o *Premiere*), ele entra em ação.
+3. **Libera Recursos:** Fecha navegadores, Discord, Spotify e outros devoradores de RAM.
+4. **Restaura Tudo:** Quando você fecha o jogo, ele reabre todos os seus apps e os deixa exatamente como estavam.
 
----
+## 📥 Como Instalar
 
-## 📦 Instalação
+1. Vá na aba **[Releases](../../releases)** aqui do GitHub.
+2. Baixe o arquivo `GamePerformanceOptimizer-v3.5.zip`.
+3. Extraia a pasta.
+4. Clique duas vezes em `Install-GameOptimizer.bat`.
+   - *Vai pedir permissão de administrador para criar a tarefa agendada.*
 
-### Opção 1: Instalação Rápida (Recomendado)
+## ⚙️ Como Configurar (Passo a Passo)
 
-1. Baixe a versão mais recente: **[GamePerformanceOptimizer-v1.0.zip](../../releases/latest)**
-2. Extraia o arquivo ZIP
-3. Execute `Setup.ps1` (clique com botão direito → Executar com PowerShell)
-4. Siga o assistente interativo para selecionar quais aplicativos gerenciar
+O instalador agora tem um **Assistente Visual**:
 
-### Opção 2: Usando a Interface do Gerenciador
+### Passo 1: Escolha os Gatilhos
+Selecione QUAIS aplicativos devem ativar o modo foco.
+- *Exemplo:* Marque `steam`, `epicgames` e `photoshop`.
+- Se qualquer um deles abrir, a otimização começa.
 
-1. Baixe e extraia o ZIP
-2. Execute `GameOptimizer-Manager.bat`
-3. Selecione a opção **[1] Instalar Game Optimizer**
-4. Siga o assistente de configuração
+### Passo 2: O que fechar?
+Selecione o que deve ser encerrado para liberar memória.
+- *Exemplo:* `chrome`, `msedge`, `discord`, `spotify`.
+- (Opcional) Marque "Otimizar Serviços do Windows" para pausar serviços inúteis (SysMain, DiagTrack, etc).
 
----
+## 🎮 Exemplo de Uso
 
-## 🎮 Como Funciona
+**Cenário Gamer:**
+1. Você configurou a **Steam** como gatilho.
+2. Você abre a Steam.
+3. O Otimizador fecha o Chrome (que estava com 50 abas) e o Discord.
+4. Você joga com FPS mais estável.
+5. Você fecha a Steam.
+6. O Chrome e o Discord abrem sozinhos novamente.
 
-### Cenário de Exemplo
+**Cenário Produtividade:**
+1. Você configura o **Visual Studio Code** como gatilho.
+2. Ao abrir o VS Code, ele fecha o Spotify e o navegador para você focar.
 
-**Antes de Jogar:**
-- Você tem Chrome (50 abas), Discord, Spotify e outros apps rodando
-- Seu sistema está usando ~8GB de RAM
+## 🛠️ Resolução de Problemas
 
-**Você Inicia a Steam:**
-1. Game Optimizer detecta a Steam iniciando
-2. Fecha automaticamente Chrome, Discord, Spotify
-3. Para serviços desnecessários do Windows (se habilitado)
-4. Seu sistema agora tem ~4GB de RAM disponível para jogos
+**O instalador não abre?**
+- Clique com o botão direito no arquivo `.bat` ou `.ps1` -> Propriedades -> Marque "Desbloquear" se houver.
+- Tenha certeza que extraiu o ZIP, não rode de dentro do ZIP.
 
-**Você Fecha a Steam:**
-1. Game Optimizer detecta que a Steam foi fechada
-2. Reabre automaticamente Chrome, Discord, Spotify com os argumentos corretos
-3. Reinicia os serviços do Windows
-4. Tudo volta ao normal
-
----
-
-## 🛠️ Interface de Gerenciamento
-
-Execute `GameOptimizer-Manager.bat` para acesso fácil a:
-
-```
-========================================
- Game Performance Optimizer v3.5
-========================================
-
-  Status: INSTALADO
-  Estado: Running
-
-  [1] Ver Status Detalhado
-  [2] Atualizar/Reiniciar Servico
-  [3] Reconfigurar (mudar apps)
-  [4] Ver Logs
-  [5] Desinstalar
-  [0] Sair
-
-========================================
-  Escolha uma opcao:
-```
-
----
-
-## ⚙️ Configuração
-
-O arquivo `config.json` (criado durante a instalação) contém todas as configurações:
-
-```json
-{
-  "triggerProcess": ["steam"],
-  "processesToManage": [
-    "chrome",
-    "msedge",
-    "discord",
-    "spotify",
-    "slack"
-  ],
-  "processesToReopenOnly": [
-    "chrome",
-    "discord",
-    "spotify"
-  ],
-  "servicesToManage": [
-    "DiagTrack",
-    "SysMain",
-    "BITS",
-    "DoSvc"
-  ],
-  "settings": {
-    "steamCheckInterval": 5,
-    "enableLogging": true,
-    "enableServiceManagement": true,
-    "reopenDelay": 3
-  }
-}
-```
-
-### Opções de Configuração
-
-| Configuração | Descrição |
-|--------------|-----------|
-| `triggerProcess` | Aplicativos que ativam a otimização (ex: `steam`, `epicgames`) |
-| `processesToManage` | Aplicativos a fechar durante jogos |
-| `processesToReopenOnly` | Aplicativos que devem ser reabertos após jogos |
-| `servicesToManage` | Serviços do Windows a parar durante jogos |
-| `steamCheckInterval` | Com que frequência verificar se o gatilho está rodando (segundos) |
-| `enableLogging` | Habilitar/desabilitar logs |
-| `enableServiceManagement` | Habilitar/desabilitar gerenciamento de serviços do Windows |
-| `reopenDelay` | Atraso antes de reabrir apps (segundos) |
-
----
-
-## 📋 Requisitos
-
-- **SO:** Windows 10 ou Windows 11
-- **PowerShell:** 5.1 ou superior (pré-instalado no Windows 10/11)
-- **Privilégios:** Administrador (apenas para instalação)
-
----
-
-## 🐛 Solução de Problemas
-
-### Apps não estão fechando?
-
-1. Verifique os logs: `GameOptimizer-Manager.bat` → Opção **[4]**
-2. Verifique se o nome do processo corresponde exatamente (ex: `chrome` não `chrome.exe`)
-3. Certifique-se de ter permissão para fechar o processo
-4. Verifique se o app está rodando com privilégios elevados
-
-### Apps não estão reabrindo?
-
-- **Detecção de atalhos** extrai automaticamente informações de inicialização para apps na pasta Inicializar
-- Para apps **não** na pasta Inicializar, usa-se WMI como fallback para capturar argumentos
-- Verifique os logs por mensagens **"Extracted from Startup shortcut"**
-- Se a reabertura falhar, verifique se o app requer argumentos específicos
-
-### Erros de gerenciamento de serviços?
-
-- Execute a instalação como **Administrador**
-- Certifique-se de que os serviços não são críticos para o funcionamento do Windows
-- Desabilite o gerenciamento de serviços no `config.json` se necessário:
-  ```json
-  "settings": {
-    "enableServiceManagement": false
-  }
-  ```
-
-### Tarefa não está rodando?
-
-1. Abra o Agendador de Tarefas
-2. Procure por **"GamePerformanceOptimizer"**
-3. Clique com botão direito → **Executar** para testar manualmente
-4. Verifique a aba **Histórico** para erros
-
----
-
-## 🔧 Desinstalação
-
-1. Execute `GameOptimizer-Manager.bat`
-2. Selecione a opção **[5] Desinstalar**
-3. Confirme a remoção
-
-**Ou** execute `Uninstall-GameOptimizer.bat` diretamente.
-
----
+**Espanso / Apps de Sistema:**
+- O otimizador já sabe lidar com apps complexos como o Espanso, capturando os argumentos de inicialização corretamente.
 
 ## 🤝 Contribuindo
 
-Contribuições são bem-vindas! Sinta-se à vontade para enviar um Pull Request.
-
-### Configuração de Desenvolvimento
-
-1. Clone o repositório
-2. Copie `config.sample.json` para `config.json`
-3. Modifique os scripts conforme necessário
-4. Teste usando `GameOptimizer.ps1` diretamente
+Sinta-se livre para abrir Issues ou Pull Requests. O projeto é 100% PowerShell nativo e fácil de entender.
 
 ---
-
-## 📄 Licença
-
-Este projeto é open source e está disponível sob a [Licença MIT](LICENSE).
-
----
-
-## 📞 Suporte
-
-Para problemas, dúvidas ou solicitações de recursos:
-- 🐛 [Abra uma issue](../../issues)
-- 💬 [Inicie uma discussão](../../discussions)
-
----
-
-## ⭐ Mostre Seu Apoio
-
-Se você achar este projeto útil, considere dar uma estrela no GitHub!
-
----
-
-**Feito com ❤️ para ajudar gamers a obter o melhor desempenho**
+*Desenvolvido para ser leve, rápido e invisível.*
