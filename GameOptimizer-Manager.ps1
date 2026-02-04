@@ -165,9 +165,9 @@ function Show-DetailedStatus {
                 $config = Get-Content $configPath -Raw | ConvertFrom-Json
                 Write-Host "`n  Configuracao Atual:" -ForegroundColor White
                 Write-Host "    Gatilhos: " -NoNewline
-                Write-Host ($config.triggerProcess -join ", ") -ForegroundColor Cyan
+                Write-Host (($config.triggerProcess | Sort-Object) -join ", ") -ForegroundColor Cyan
                 Write-Host "    Apps Gerenciados: " -NoNewline
-                Write-Host ($config.processesToManage -join ", ") -ForegroundColor Cyan
+                Write-Host (($config.processesToManage | Sort-Object) -join ", ") -ForegroundColor Cyan
             }
             catch {
                 Write-Host "  [AVISO] Erro ao ler configuracao" -ForegroundColor Yellow
