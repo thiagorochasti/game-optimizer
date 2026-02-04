@@ -266,8 +266,9 @@ function Close-ManagedProcesses {
                             Write-Log "Closing: $processName (Path: $processPath)" -Level INFO
                             
                             # Store the path for later reopening ONLY if it's in the reopen list
-                            # Skip if we already got it from the shortcut (Espanso case)
                             if ($processName -in $script:Config.processesToReopenOnly) {
+                                # IMPORTANT: Only use WMI if we DON'T already have info from shortcut
+                                # Shortcut arguments take priority (e.g., Espanso uses "launcher" not "worker --monitor-daemon")
                                 if (-not $script:ClosedProcesses.ContainsKey($processName)) {
                                     # Try to get command line arguments via WMI
                                     $args = ""
@@ -292,6 +293,9 @@ function Close-ManagedProcesses {
                                         Args = $args
                                     }
                                     Write-Log "Saved for reopening: $processName (Args: '$args')" -Level INFO
+                                }
+                                else {
+                                    Write-Log "Skipping WMI detection for $processName - already saved from shortcut" -Level INFO
                                 }
                             }
                             else {
