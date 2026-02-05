@@ -45,6 +45,54 @@ function Write-Log {
     }
 }
 
+# Rotate log file to prevent excessive size
+function Rotate-LogFile {
+    param(
+        [int]$MaxAgeDays = 1,  # Keep last 24 hours by default
+        [int]$MaxSizeMB = 10    # Also rotate if file exceeds this size
+    )
+    
+    try {
+        if (-not (Test-Path $script:LogPath)) { return }
+        
+        $logFile = Get-Item $script:LogPath
+        $fileSizeMB = [math]::Round($logFile.Length / 1MB, 2)
+        
+        # Check if file is too large or too old
+        $shouldRotate = $false
+        $reason = ""
+        
+        if ($fileSizeMB -gt $MaxSizeMB) {
+            $shouldRotate = $true
+            $reason = "size ($fileSizeMB MB > $MaxSizeMB MB)"
+        }
+        
+        if ($shouldRotate) {
+            # Keep only recent entries (last 24 hours)
+            $cutoffTime = (Get-Date).AddDays(-$MaxAgeDays)
+            $allLines = Get-Content $script:LogPath
+            
+            $recentLines = $allLines | Where-Object {
+                if ($_ -match '^\[(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\]') {
+                    $logTime = [datetime]::ParseExact($matches[1], "yyyy-MM-dd HH:mm:ss", $null)
+                    return $logTime -gt $cutoffTime
+                }
+                return $false  # Skip malformed lines
+            }
+            
+            # Write back only recent lines
+            $recentLines | Set-Content $script:LogPath -Force
+            
+            $newSizeMB = [math]::Round((Get-Item $script:LogPath).Length / 1MB, 2)
+            Write-Log "Log rotated due to $reason. Size reduced: $fileSizeMB MB -> $newSizeMB MB" -Level INFO
+        }
+    }
+    catch {
+        # Silent fail - don't let log rotation break the app
+    }
+}
+
+
 # Load configuration
 function Load-Config {
     try {
