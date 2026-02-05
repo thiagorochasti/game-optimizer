@@ -220,20 +220,41 @@ function Close-ManagedProcesses {
             if (-not $script:ClosedProcesses.ContainsKey($processName)) {
                 $startupFolder = [Environment]::GetFolderPath("Startup")
                 
-                # Try common shortcut name patterns: ProcessName.lnk, ProcessName*.lnk
-                # Also try without last character if process ends with 'd' (e.g., espansod -> espanso)
+                # Strategy 1: Exact and prefix matches
                 $possibleShortcuts = @(
                     (Join-Path $startupFolder "$processName.lnk"),
                     (Get-ChildItem -Path $startupFolder -Filter "$processName*.lnk" -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName)
                 )
                 
-                # Fuzzy match: if process ends with 'd', also try without it
-                if ($processName -match 'd$') {
-                    $baseProcessName = $processName.Substring(0, $processName.Length - 1)
-                    $possibleShortcuts += @(
-                        (Join-Path $startupFolder "$baseProcessName.lnk"),
-                        (Get-ChildItem -Path $startupFolder -Filter "$baseProcessName*.lnk" -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName)
-                    )
+                # Strategy 2: Fuzzy matching for common patterns
+                # Remove common suffixes: d, app, exe, daemon, etc.
+                $baseNames = @($processName)
+                if ($processName -match '(d|app|daemon|exe)$') {
+                    $baseNames += $processName -replace '(d|app|daemon|exe)$', ''
+                }
+                
+                foreach ($baseName in $baseNames) {
+                    if ($baseName -ne $processName) {
+                        $possibleShortcuts += @(
+                            (Join-Path $startupFolder "$baseName.lnk"),
+                            (Get-ChildItem -Path $startupFolder -Filter "$baseName*.lnk" -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName)
+                        )
+                    }
+                }
+                
+                # Strategy 3: Case-insensitive partial matching
+                # Find any shortcut that contains the process name (or vice versa)
+                if (-not ($possibleShortcuts | Where-Object { $_ -and (Test-Path $_) })) {
+                    $allShortcuts = Get-ChildItem -Path $startupFolder -Filter "*.lnk" -ErrorAction SilentlyContinue
+                    foreach ($shortcut in $allShortcuts) {
+                        $shortcutBaseName = [System.IO.Path]::GetFileNameWithoutExtension($shortcut.Name)
+                        # Match if process name contains shortcut name OR shortcut contains process name (case-insensitive)
+                        if (($processName -like "*$shortcutBaseName*") -or ($shortcutBaseName -like "*$processName*")) {
+                            $possibleShortcuts += $shortcut.FullName
+                            Write-Log "Fuzzy matched shortcut: $($shortcut.Name) for process: $processName" -Level INFO
+                            break  # Use first match
+                        }
+                    }
                 }
                 
                 foreach ($shortcutPath in $possibleShortcuts) {
