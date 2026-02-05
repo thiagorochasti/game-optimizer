@@ -665,6 +665,9 @@ try {
         exit 1
     }
     
+    # Rotate log file on startup (keep last 24 hours, max 10MB)
+    Rotate-LogFile -MaxAgeDays 1 -MaxSizeMB 10
+    
     # Start monitoring
     Start-OptimizationLoop
 }
