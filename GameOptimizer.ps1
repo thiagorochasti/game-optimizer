@@ -221,10 +221,20 @@ function Close-ManagedProcesses {
                 $startupFolder = [Environment]::GetFolderPath("Startup")
                 
                 # Try common shortcut name patterns: ProcessName.lnk, ProcessName*.lnk
+                # Also try without last character if process ends with 'd' (e.g., espansod -> espanso)
                 $possibleShortcuts = @(
                     (Join-Path $startupFolder "$processName.lnk"),
                     (Get-ChildItem -Path $startupFolder -Filter "$processName*.lnk" -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName)
                 )
+                
+                # Fuzzy match: if process ends with 'd', also try without it
+                if ($processName -match 'd$') {
+                    $baseProcessName = $processName.Substring(0, $processName.Length - 1)
+                    $possibleShortcuts += @(
+                        (Join-Path $startupFolder "$baseProcessName.lnk"),
+                        (Get-ChildItem -Path $startupFolder -Filter "$baseProcessName*.lnk" -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName)
+                    )
+                }
                 
                 foreach ($shortcutPath in $possibleShortcuts) {
                     if ($shortcutPath -and (Test-Path $shortcutPath)) {
